@@ -16,7 +16,13 @@ import "./App.css";
 class App extends Component {
 	state = {
 		folders: [],
-		notes: []
+		notes: [],
+		inputs: {
+			name: '',
+			content: '',
+			folderId: '',
+			modified: '',
+		}
 	};
 
 	// =================Update state with get request================
@@ -68,13 +74,20 @@ class App extends Component {
 		});
 	};
 
+	// onChange
+	updateNewName = value => {
+		this.setState({inputs: {...this.state.inputs, name: value}});
+	};
+
 	render() {
 		const contextValue = {
 			folders: this.state.folders,
 			notes: this.state.notes,
 			deleteNote: this.deleteNote,
 			addNote: this.addNote,
-			addFolder: this.addFolder
+			addFolder: this.addFolder,
+			updateNewName: this.updateNewName,
+			inputs: this.state.inputs
 			// add new note, add new folder and delete note
 		};
 		// console.log(contextValue);

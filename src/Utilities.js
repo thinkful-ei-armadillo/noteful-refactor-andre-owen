@@ -1,18 +1,20 @@
 // the callback is App.addFolder
-function addFolder(folder, callBack) {
+function addFolder(folder, callBack, history) {
 	const options = {
 		method: "POST",
 		headers: { "content-type": "application/json" },
 		body: folder
 	};
-	debugger;
 
 	fetch(`http://localhost:9090/folders/`, options)
 		.then(res => {
 			if (res.ok) return res.json();
 			else throw new Error(res.status);
 		})
-		.then(() => callBack(folder))
+		.then(json => {
+			callBack(json);
+			history.push('/');
+		})
 		.catch(error => console.log(error));
 }
 
