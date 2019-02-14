@@ -51,7 +51,9 @@ class Notelist extends Component {
 						</li>
 					);
 				})}
-				<Link to="/addNote">Add Note</Link>
+				<Link to={`/addNote/${this.props.match.params.folderId}`}>
+					Add Note
+				</Link>
 			</ul>
 		);
 	}

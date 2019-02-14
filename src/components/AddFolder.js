@@ -8,11 +8,21 @@ export default class AddFolder extends Component {
 	render() {
 		return (
 			<>
-			<input onChange={(e) => this.context.updateNewName(e.target.value)}></input>
-			<button
-				onClick={() => addFolder(JSON.stringify({ name: this.context.inputs.name }), this.context.addFolder, this.props.history)}>
-				Adding Folder
-			</button>
+				<input
+					type="text"
+					className="name"
+					onChange={e => this.context.updateNewName(e.target.value)}
+				/>
+				<button
+					onClick={() =>
+						addFolder(
+							JSON.stringify({ name: this.context.inputs.name }),
+							this.context.addFolder,
+							this.props.history
+						)
+					}>
+					Adding Folder
+				</button>
 			</>
 		);
 	}

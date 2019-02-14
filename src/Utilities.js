@@ -13,20 +13,21 @@ function addFolder(folder, callBack, history) {
 		})
 		.then(json => {
 			callBack(json);
-			history.push('/');
+			history.push("/");
 		})
 		.catch(error => console.log(error));
 }
 
 // the callback is App.addNote
-function addNote(
-	note = JSON.stringify({ name: "thing", content: "text" }),
-	callBack
-) {
+function addNote(note, callBack, history) {
+	const newNote = JSON.stringify({
+		...note,
+		modified: "" //timestamp at time of submit
+	});
 	const options = {
 		method: "POST",
 		headers: { "content-type": "application/json" },
-		body: note
+		body: newNote
 	};
 
 	fetch(`http://localhost:9090/notes/`, options)
@@ -34,9 +35,13 @@ function addNote(
 			if (res.ok) return res.json();
 			else throw new Error(res.status);
 		})
-		.then(() => callBack(note))
+		.then(json => {
+			callBack(json);
+			history.push("/");
+		})
 		.catch(error => console.log(error));
 }
+
 function deleteNote(noteId, callBack) {
 	const options = {
 		method: "DELETE",

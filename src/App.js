@@ -18,10 +18,10 @@ class App extends Component {
 		folders: [],
 		notes: [],
 		inputs: {
-			name: '',
-			content: '',
-			folderId: '',
-			modified: '',
+			name: "",
+			content: "",
+			folderId: "",
+			modified: ""
 		}
 	};
 
@@ -53,6 +53,11 @@ class App extends Component {
 	}
 	// ===============================================================
 
+	// code some kind of reset function at some point
+	// resetInputs = () => {
+	//   this.setState(inputs: {})
+	// };
+
 	addFolder = folder => {
 		const newFolders = [...this.state.folders, folder];
 		this.setState({
@@ -65,6 +70,7 @@ class App extends Component {
 		this.setState({
 			notes: newNotes
 		});
+		console.log(this.state);
 	};
 
 	deleteNote = noteId => {
@@ -76,7 +82,11 @@ class App extends Component {
 
 	// onChange
 	updateNewName = value => {
-		this.setState({inputs: {...this.state.inputs, name: value}});
+		this.setState({ inputs: { ...this.state.inputs, name: value } });
+	};
+
+	updateNewContent = value => {
+		this.setState({ inputs: { ...this.state.inputs, content: value } });
 	};
 
 	render() {
@@ -87,6 +97,7 @@ class App extends Component {
 			addNote: this.addNote,
 			addFolder: this.addFolder,
 			updateNewName: this.updateNewName,
+			updateNewContent: this.updateNewContent,
 			inputs: this.state.inputs
 			// add new note, add new folder and delete note
 		};
@@ -113,7 +124,7 @@ class App extends Component {
 								<Route path="/folder/:folderId" component={Notelist} />
 								<Route path="/note/:noteId" component={NoteInfo} />
 								<Route path="/addFolder" component={AddFolder} />
-								<Route path="/addNote" component={AddNote} />
+								<Route path="/addNote/:folderId" component={AddNote} />
 							</Switch>
 						</main>
 					</div>
